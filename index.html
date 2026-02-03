@@ -3,75 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Valentine 💘</title>
+  <title>My Valentine 💖</title>
+
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
       text-align: center;
       padding: 40px 20px;
       color: #fff;
+      overflow: hidden;
     }
-    h1 { font-size: 2.2em; }
-    p { font-size: 1.2em; margin-bottom: 30px; }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.25em;
+      margin-bottom: 30px;
+    }
+
     button {
       font-size: 1.2em;
-      padding: 14px 28px;
-      border: none;
+      padding: 14px 32px;
       border-radius: 30px;
+      border: none;
       cursor: pointer;
       margin: 10px;
     }
+
     #yes {
       background: #ff4d6d;
       color: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
+
     #no {
       background: white;
       color: #ff4d6d;
       position: absolute;
     }
-    .hidden { display: none; }
-    .confetti {
+
+    .hidden {
+      display: none;
+    }
+
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
       pointer-events: none;
     }
   </style>
 </head>
+
 <body>
 
-  <h1>Will you be my Valentine? 💖</h1>
-  <p>Choose one</p>
+  <h1 id="question">Buddi, will you be my Valentine? 💕</h1>
+  <p>I’ll love Chloe, but you’re my forever Valentine 💘</p>
 
-  <button id="yes">Obviously yes 😍</button>
-  <button id="no">No 🙄</button>
+  <button id="yes">Always & forever ❤️</button>
+  <button id="no">I need to think… 🥺</button>
 
   <h1 id="final" class="hidden">
-    Congratulations 🎉<br/>
-    I’ll love Chloe, but you’re my forever Valentine 💘
+    Happy Valentine’s Day, Buddi 💖<br/><br/>
+    Thank you for being my heart,<br/>
+    my home, and my forever.<br/><br/>
+    I love you endlessly ❤️
   </h1>
 
-  <canvas class="confetti hidden" id="confetti"></canvas>
+  <canvas id="confetti" class="hidden"></canvas>
 
 <script>
+  const sweetQuestions = [
+    "Buddi, will you be my Valentine? 💕",
+    "Can I choose you today… and every day after? ❤️",
+    "Will you keep holding my hand forever? 🤍",
+    "Do you know you’re my favorite person in the world? 💖",
+    "Can I keep loving you for the rest of my life? 💍",
+    "Are you aware that my heart chose you already? 🥰",
+    "Will you be mine, just like I’m always yours? 💞"
+  ];
+
   const noBtn = document.getElementById("no");
   const yesBtn = document.getElementById("yes");
+  const question = document.getElementById("question");
   const finalMsg = document.getElementById("final");
   const confetti = document.getElementById("confetti");
 
   noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * (window.innerWidth - 140);
+    const y = Math.random() * (window.innerHeight - 60);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
+
+    const randomQ = sweetQuestions[Math.floor(Math.random() * sweetQuestions.length)];
+    question.textContent = randomQ;
   });
 
   yesBtn.addEventListener("click", () => {
-    document.querySelector("h1").classList.add("hidden");
+    question.classList.add("hidden");
     document.querySelector("p").classList.add("hidden");
     yesBtn.classList.add("hidden");
     noBtn.classList.add("hidden");
@@ -85,12 +118,12 @@
     confetti.width = window.innerWidth;
     confetti.height = window.innerHeight;
 
-    const pieces = Array.from({ length: 150 }, () => ({
+    const pieces = Array.from({ length: 180 }, () => ({
       x: Math.random() * confetti.width,
       y: Math.random() * confetti.height,
       r: Math.random() * 6 + 4,
       d: Math.random() * 50,
-      color: `hsl(${Math.random() * 360}, 100%, 70%)`
+      color: `hsl(${Math.random() * 360}, 100%, 75%)`
     }));
 
     function draw() {
